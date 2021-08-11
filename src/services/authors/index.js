@@ -8,17 +8,16 @@ import uniqid from 'uniqid'
 
 
 
+const authorsJSONpath = join(dirname(fileURLToPath(import.meta.url)) , 'authors.json')
 const authorsRouter = express.Router()
-const currentFilePath = fileURLToPath(import.meta.url)
-const currnetDirPath = dirname(currentFilePath)
-const authorsJSONpath = join(currnetDirPath , 'authors.json')
+
 
                                  // post 
 authorsRouter.post('/',(request,response)=>{
     console.log(request.body)
     console.log(uniqid())
     //step 1
-    const newAuthors = {...request.body, id:uniqid(), createdAt: new Date()}
+    const newAuthors = {id:uniqid(),...request.body,createdAt: new Date()}
     //step 2
     const authors = JSON.parse(fs.readFileSync(authorsJSONpath))
     //step 3
